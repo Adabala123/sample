@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-COPY target/spring-boot-docker-app.jar /app.jar
+COPY spring-boot-docker-app.jar /app.jar
 
 CMD ["java", "-jar", "/app.jar"]
 
