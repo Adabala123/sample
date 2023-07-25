@@ -1,15 +1,11 @@
-# Pull base image
-FROM ubuntu:latest
+FROM openjdk:11
 
-# Dockerfile Maintainer
-MAINTAINER manikanta "manikanta.org"
+COPY target/spring-boot-docker-app.jar  /usr/app/
 
-# Install nginx and adjust nginx config to stay in foreground
-RUN apt-get update && apt-get install --no-install-recommends -y nginx; \
- echo "daemon off;" >> /etc/nginx/nginx.conf
+RUN mvn clean package
 
-# Expose HTTP
-EXPOSE 80
+WORKDIR /usr/app/
 
-# Start nginx
-CMD ["/usr/sbin/nginx"]
+ENTRYPOINT ["java", "-jar", "spring-boot-docker-app.jar"]
+
+EXPOSE 9090
